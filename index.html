@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperlion [HPRN] - osu! Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1C1719;
+            --panel-color: #382E32;
+            --primary-color: #ffffff;
+            --secondary-color: #46393F;
+            --text-color: #DDC9D1;
+            --text-secondary: #ffffff;
+            --border-color: #382E32;
+            --team-name-bg: #46393F;
+            --highlight-color: #36202a;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .team-banner {
+            width: 100%;
+            height: 250px;
+            background: url('https://media.masiyu.jp/8mHFoVsPoJlW.png');
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 0;
+        }
+        
+        .logo-container {
+            position: absolute;
+            left: 20px;
+            bottom: -25px;
+            z-index: 2;
+        }
+        
+        .logo-background {
+            width: 130px;
+            height: 130px;
+            border-radius: 30%;
+            background-color: var(--panel-color);
+            border: 4px solid var(--bg-color);
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-name-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .team-name-section {
+            background-color: var(--team-name-bg);
+            padding: 20px 20px 15px 140px;
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .team-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .separator {
+            height: 30px;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .team-tag {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .info-item {
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .info-value {
+            font-weight: 500;
+        }
+        
+        .rank-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .rank-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-item {
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .stat-value {
+            font-weight: 500;
+        }
+        
+        .member-section {
+            margin-top: 20px;
+        }
+        
+        .member-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .member-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .member-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .member-name {
+            font-weight: 500;
+        }
+        
+        .member-status {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-align: right;
+        }
+        
+        .offline {
+            color: #ff6666;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 15px 0;
+        }
+
+        .panel {
+            background-color: var(--panel-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #FF66AB;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .panel-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 22px;
+            margin: 0;
+        }
+        
+        .panel-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            background-color: #46393F;
+            border-radius: 8px;
+            padding: 12px;
+            transition: transform 0.2s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
+            background-color: rgba(70, 57, 63, 0.7);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-comparison {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+        }
+        
+        .positive {
+            color: #4caf50;
+        }
+        
+        .negative {
+            color: #f44336;
+        }
+        
+        .skill-container {
+            margin-top: 20px;
+        }
+        
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-label {
+            font-weight: 600;
+        }
+        
+        .skill-percent {
+            color: var(--text-secondary);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: var(--bg-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #cca42a, #FFD966);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .achievement-item {
+            background-color: #46393F;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .achievement-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
+            background-color: var(--highlight-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .achievement-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .achievement-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 18px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect width="900" height="600" fill="%23fff"/><circle cx="450" cy="300" r="180" fill="%23bc002d"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .country-name {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .country-flag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .achievement-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="team-banner">
+            <div class="logo-container">
+                <div class="logo-background">
+                    <img id="discord-avatar" class="discord-avatar" alt="Icon">
+                </div>
+            </div>
+        </div>
+        
+        <div class="team-name-section">
+            <div class="team-name-container">
+                <div class="profile-container">
+                    <div class="country-flag">
+                        <div class="flag-icon"></div>
+                        <span class="country-name">Japan</span>
+                    </div>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="team-name">Masiyu</div>
+                </div>
+        </div>
+    </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">About Me</h2>
+                    <p class="panel-subtitle">Last updated: 2025年3月31日</p>
+                </div>
+                <div class="rank-badge"></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Valorant</div>
+                    <div class="stat-value">ダイヤ3</div>
+                    <div class="stat-comparison positive">+1ティア (先月比)</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">osu!</div>
+                    <div class="stat-value">2,261pp</div>
+                    <div class="stat-comparison positive">およそ+1200pp (先月比)</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">タルコフ</div>
+                    <div class="stat-value">13レベル</div>
+                    <div class="stat-comparison positive">+12レベル (先月比)</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-label">にゃんこ大戦争</div>
+                    <div class="stat-value">6575UR</div>
+                    <div class="stat-comparison">わかりません (先月比)</div>
+                </div>
+            </div>
+            
+            <div class="skill-container">
+                <h3>やることリスト</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span class="skill-label">真レジェンドクリア</span>
+                        <span class="skill-percent">56%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 56%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span class="skill-label">アセンダントを踏む</span>
+                        <span class="skill-percent">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span class="skill-label">3000ppに行く</span>
+                        <span class="skill-percent">76%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 76%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span class="skill-label">Pure Black Dyeを買う</span>
+                        <span class="skill-percent">33%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 33%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>最近の実績</h3>
+            <div class="achievement-list">
+                <div class="achievement-item">
+                    <div class="achievement-icon">💎</div>
+                    <div class="achievement-title">初めてダイヤ3を踏む</div>
+                    <div class="achievement-date">2025/3/30</div>
+                </div>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">🐺</div>
+                    <div class="achievement-title">フェンリルとウルスを殺す</div>
+                    <div class="achievement-date">2025/2/のいつか</div>
+                </div>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">🔥</div>
+                    <div class="achievement-title">ダイヤ2に落ちる</div>
+                    <div class="achievement-date">2025/3/31</div>
+                </div>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">🎯</div>
+                    <div class="achievement-title">精度99%</div>
+                    <div class="achievement-date">2025/3/23</div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">🟢</div>
+                    <div class="achievement-title">Zest Tapを習得</div>
+                    <div class="achievement-date">2025/3/29</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+            
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        });
+
+        const MANUAL_DISCORD_USER = {
+            userId: '1138794585582219265',
+            avatarHash: 'fe72424522fff4319ccc75aa7ec8327e'
+        };
+        
+        function displayManualDiscordAvatar() {
+            const avatarImg = document.getElementById('discord-avatar');
+            
+            if (MANUAL_DISCORD_USER.userId && MANUAL_DISCORD_USER.avatarHash) {
+                avatarImg.src = `https://cdn.discordapp.com/avatars/${MANUAL_DISCORD_USER.userId}/${MANUAL_DISCORD_USER.avatarHash}.png?size=256`;
+            } else if (MANUAL_DISCORD_USER.userId) {
+                const discriminator = MANUAL_DISCORD_USER.userId.slice(-4) % 5;
+                avatarImg.src = `https://cdn.discordapp.com/embed/avatars/${discriminator}.png`;
+            } else {
+                avatarImg.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+            }
+            
+            avatarImg.onerror = function() {
+                avatarImg.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+            };
+        }
+        
+        document.addEventListener('DOMContentLoaded', displayManualDiscordAvatar);
+    </script>
+</body>
+</html>
